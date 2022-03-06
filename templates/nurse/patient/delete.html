@@ -1,0 +1,62 @@
+{% extends "nurse/navbar.html" %}
+{% load widget_tweaks %}
+{% block title %}Facilitiy - Delete{% endblock %}
+{% block bodycontent %}
+    <div id="root">
+        <div class="relative md:ml-64 ">
+            <div class="px-4 mx-auto w-full">
+                <section class="py-6 mx-3 md:mx-6 px-3">
+                    <div class="flex flex-wrap justify-center">
+                        <div class="flex w-full md:w-1/2">
+                            <h3 class="text-3xl"
+                                style="font-family: Poppins;
+                                       font-style: normal;
+                                       font-weight: bold;
+                                       font-size: 36px;">
+                                Delete {{ object.name }}
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="flex my-8 justify-center">
+                        <div class="w-full md:w-1/2">
+                            <div class="flex flex-wrap w-full">
+                                <div class="flex w-full pb-[6px]">
+                                    <label class="w-full py-3"
+                                           style="font-family: Poppins;
+                                                  font-style: normal;
+                                                  font-weight: normal;
+                                                  font-size: 24px;
+                                                  line-height: 32px;
+                                                  letter-spacing: 1px;">
+                                        Facility {{ object.name }} will be deleted.
+                                        Are you sure ? Action can not be reversed.
+                                    </label>
+                                </div>
+                            </div>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <div class="flex gap-2 pt-6">
+                                    <input type="button"
+                                           class="flex cursor-pointer justify-center items-center px-3 py-2 mr-1 bg-[#00000] hover:bg-[#a7a4a46c] rounded-xl w-[150px] h-14 text-[#333333] text-center"
+                                           style="border: 2px solid #333333;
+                                                  box-sizing: border-box;
+                                                  font-family: Poppins;
+                                                  font-weight: 600;
+                                                  font-size: 13px;"
+                                           value="Cancel"
+                                           onclick="window.location='/dist_admin/facility/view/{{ object.id }}/'"/>
+                                    <input type="submit"
+                                           class="flex cursor-pointer justify-center items-center px-3 py-2 mr-1 bg-[#333333] hover:bg-[#696969] rounded-xl w-[150px] h-14 text-white text-center"
+                                           style="border: 2px solid #333333;
+                                                  box-sizing: border-box;
+                                                  font-family: Poppins;
+                                                  font-weight: 600;
+                                                  font-size: 13px;"
+                                           value="Delete"/>
+                                </div>
+                            </form>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}

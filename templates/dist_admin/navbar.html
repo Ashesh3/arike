@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+<nav class="bg-white md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden flex-wrap items-center justify-between relative md:w-64 z-10 px-6 md:px-0">
+    <div class="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
+        <button class="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent" type="button" onclick="toggleNavbar('example-collapse-sidebar')">
+            <i class="fas fa-bars"></i>
+        </button>
+        <span class="text-[#333333] md:block text-left md:pb-1 md:pt-3  font-bold mr-0 inline-block whitespace-nowrap text-xl px-6">
+            Arike
+        </span>
+        <div class="md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded hidden" id="example-collapse-sidebar">
+            <div class="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid ">
+                <div class="flex flex-wrap">
+                    <div class="w-6/12">
+                        <span class="text-[#333333] md:block text-left md:pb-2 mr-0 inline-block whitespace-nowrap text-sm uppercase text-xl p-4 px-0">
+                            Arike
+                        </span>
+                    </div>
+                    <div class="w-6/12 flex justify-end">
+                        <button type="button" class="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent" onclick="toggleNavbar('example-collapse-sidebar')">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="flex md:flex-col">
+                <div class="pb-16 ">
+                    <ul class="md:flex-col md:min-w-full md:min-h-full flex flex-col list-none">
+                        <li class="items-center pl-3 h-12">
+                            <span {% if request.resolver_match.url_name == 'dashboard' %}class="rounded-xl absolute w-52 h-12 bg-[#333333]" {% endif %}>
+                                <a href="/dist_admin/dashboard/" class=" text-xs py-3 font-bold block {% if request.resolver_match.url_name == 'dashboard' %}text-white{% endif %}">
+                                    <i class="mr-2 text-sm"></i>
+                                    Home
+                                </a>
+                            </span>
+                        </li>
+                        <li class="items-center pl-3 h-12">
+                            <span {% if request.resolver_match.url_name == 'profile' %}class="rounded-xl absolute w-52 h-12 bg-[#333333]" {% endif %}>
+                                <a href="/dist_admin/profile/" class="text-xs py-3 font-bold block {% if request.resolver_match.url_name == 'profile' %}text-white{% endif %}">
+                                    <i class="mr-2 text-sm"></i>
+                                    Profile
+                                </a>
+                            </span>
+                        </li>
+                        <li class="items-center pl-3 h-12">
+                            <span {% if request.resolver_match.url_name == 'facility' %}class="rounded-xl absolute w-52 h-12 bg-[#333333]" {% endif %}>
+                                <a href="/dist_admin/facility/" class="text-xs py-3 font-bold block {% if request.resolver_match.url_name == 'facility' %}text-white{% endif %}">
+                                    <i class="mr-2 text-sm"></i>
+                                    Facilities
+                                </a>
+                            </span>
+                        </li>
+                        <li class="items-center pl-3 h-12">
+                            <span {% if request.resolver_match.url_name == 'users' %}class="rounded-xl absolute w-52 h-12 bg-[#333333]" {% endif %}>
+                                <a href="/dist_admin/users/" class="text-xs py-3 font-bold block {% if request.resolver_match.url_name == 'users' %}text-white{% endif %}">
+                                    <i class="mr-2 text-sm"></i>
+                                    Users
+                                </a>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bottom-0 fixed w-max flex items-center">
+                    <div class="pl-5 pb-10 px-3">
+                        <div class="w-52 pb-2">
+                            <hr>
+                        </div>
+                        <div class="flex pl-5">
+                            <div class="font-bold rounded-full bg-[#C4C4C4] flex items-center justify-center font-mono  h-12 w-12" style="font-family: Poppins;">
+                                {{ user.first_name|slice:":1" }}
+                            </div>
+                            <div>
+                                <h6 class="text-xl pl-5">
+                                    {{ user.get_full_name }}
+                                </h6>
+                                <a href="/logout/" class="text-sm font-medium text-[#2D9CDB] pl-5">Log out</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+{% block bodycontent %}{% endblock %}
+{% endblock %}

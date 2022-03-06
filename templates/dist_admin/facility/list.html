@@ -1,0 +1,229 @@
+{% extends "dist_admin/navbar.html" %}
+{% block title %}Facilities{% endblock %}
+{% block bodycontent %}
+    <div class="relative md:ml-64 ">
+        <div class="px-4 mx-auto w-full">
+            <section class="py-6 mx-3 md:mx-6 px-3">
+                <div class="container">
+                    <div class="flex flex-wrap justify-between">
+                        <div class="flex">
+                            <h2 class="text-4xl"
+                                style="font-family: Poppins;
+                                       font-style: normal;
+                                       font-weight: bold;
+                                       font-size: 36px;">
+                                Facility
+                            </h2>
+                        </div>
+                        <div class="flex">
+                            <a href="/dist_admin/facility/create/"
+                               class="text-white flex flex-row justify-center items-center  w-[90px] h-10 bg-[#333333] hover:bg-[#696969] rounded-md">New</a>
+                        </div>
+                    </div>
+                    <div class="container my-8">
+                        <div class="relative flex flex-wrap items-stretch">
+                            <span class="z-10 h-full leading-snug font-normal absolute text-center text-slate-400  bg-transparent rounded text-base items-center justify-center w-8 pl-3 pr-3 py-3">
+                                <svg width="24"
+                                     height="24"
+                                     viewBox="0 0 24 24"
+                                     fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11 20C15.9706 20 20 15.9706 20 11C20 6.02944 15.9706 2 11 2C6.02944 2 2 6.02944 2 11C2 15.9706 6.02944 20 11 20Z"
+                                          stroke="#6E7191"
+                                          stroke-width="2"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round"/>
+                                    <path d="M22 22L18 18"
+                                          stroke="#6E7191"
+                                          stroke-width="2"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            <input type="text"
+                                   placeholder="Search"
+                                   id="search_query"
+                                   value="{{ request.GET.query }}"
+                                   class="border-0 px-3 py-3 relative rounded-md bg-slate-100 text-sm shadow outline-none focus:outline-none pl-12 w-80"
+                                   onchange="searchQuery()">
+                        </div>
+                        <div class="bg-white p-4 rounded-xl mt-4 md:w-[736px] h-[271px]">
+                            <div class="flex flex-wrap">
+                                <h4 class="text-3xl px-3"
+                                    style="font-family: Poppins;
+                                           font-style: normal;
+                                           font-weight: bold;
+                                           font-size: 24px;
+                                           line-height: 32px;
+                                           color: #000000;">
+                                    Filters
+                                </h4>
+                            </div>
+                            <form method="get" id="filter_form">
+                                <div class="flex flex-wrap w-full md:py-6 pt-6 pb-0">
+                                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                        <label class="block uppercase tracking-wide text-xs font-bold mb-2"
+                                               for="grid-ward">Ward</label>
+                                        <select class="block appearance-none w-full bg-white border border-black rounded-xl  py-3 px-4 pr-8 focus:outline-none focus:border-0"
+                                                id="input-ward">
+                                            <option value="" {% if request.GET.ward == "" %}selected{% endif %}>
+                                                All
+                                            </option>
+                                            {% for ward in wards %}
+                                                <option value="{{ ward.name }}"
+                                                        {% if ward.name in request.GET.ward %}selected{% endif %}>
+                                                    {{ ward.name }}
+                                                </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                        <label class="block uppercase tracking-wide text-xs font-bold mb-2"
+                                               for="grid-kind">Kind</label>
+                                        <div class="relative">
+                                            <select class="block appearance-none w-full bg-white border border-black rounded-xl  py-3 px-4 pr-8 focus:outline-none focus:border-0"
+                                                    id="input-kind">
+                                                <option value="" {% if request.GET.kind == "" %}selected{% endif %}>
+                                                    All
+                                                </option>
+                                                {% for kind in kinds %}
+                                                    <option value="{{ kind.0 }}"
+                                                            {% if kind.0 in request.GET.kind %}selected{% endif %}>
+                                                        {{ kind.1 }}
+                                                    </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-wrap w-full px-3">
+                                    <button type="submit"
+                                            class="flex flex-row justify-center items-center absolute w-24 h-12 bg-[#333333] hover:bg-[#696969] text-white rounded-md">
+                                        Apply
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="grid-cols-1 md:grid-cols-2 grid w-full gap-5 py-6">
+                        {% for facility in facilities %}
+                            <!--Card{-->
+                            <div class="w-full" style="display: contents;">
+                                <div class="bg-white rounded-xl">
+                                    <div class="flex flex-wrap w-full justify-between px-6 py-[13px]">
+                                        <div class="flex w-8/12">
+                                            <h4 class="text-3xl"
+                                                style="font-family: Poppins;
+                                                       font-style: normal;
+                                                       font-weight: 600;
+                                                       font-size: 20px;
+                                                       line-height: 32px;
+                                                       letter-spacing: 0.75px;
+                                                       color: #333333;">
+                                                {{ facility.name }}
+                                            </h4>
+                                        </div>
+                                        <div class="flex w-4/12 justify-end">
+                                            <span class="text-[#4F4F4F] bg-[#E0E0E0] px-6 py-2 rounded-[46px] uppercase"
+                                                  style="font-family: Poppins;
+                                                         font-style: normal;
+                                                         font-weight: 500;">
+                                            {{ facility.kind }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="w-full py-6 px-6">
+                                        <p class="text-[#4F4F4F]"
+                                           style="font-family: Poppins;
+                                                  font-style: normal;
+                                                  font-weight: normal;
+                                                  font-size: 15px;
+                                                  line-height: 24px;">
+                                            {{ facility.address }}
+                                        </p>
+                                        <h6 class="uppercase font-bold pt-4 text-[#4F4F4F]">{{ facility.ward }}</h6>
+                                    </div>
+                                    <div class="py-3 px-6 text-black" style="border-top: 3px solid #F2F2F2;">
+                                        <div class="flex flex-wrap w-full justify-between">
+                                            <div class="flex">
+                                                <h4 class="py-2"
+                                                    style="font-family: Poppins;
+                                                           font-style: normal;
+                                                           font-weight: 600;
+                                                           font-size: 15px;
+                                                           line-height: 24px;
+                                                           letter-spacing: 0.75px;
+                                                           color: #000000;">
+                                                    {{ facility.phone }}
+                                                </h4>
+                                            </div>
+                                            <div class="flex">
+                                                <a href="/dist_admin/facility/view/{{ facility.id }}/"
+                                                   class="px-3 py-2 rounded-md mr-1 w-[90px] h-[40px] flex flex-row justify-center items-center "
+                                                   style="border: 2px solid #333333; box-sizing: border-box; border-radius: 8px; family: Poppins; font-style: normal; font-weight: 600; font-size: 13px; line-height: 22px; ">View
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--}Card-->
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script>
+    function joinParam(object) {
+        var parameters = [];
+        for (var property in object) {
+            if (object.hasOwnProperty(property)) {
+                parameters.push(encodeURI(property + '=' + object[property]));
+            }
+        }
+
+        return parameters.join('&');
+    }
+
+    function parseURLParams() {
+        const url = window.location.href;
+        let queryStart = url.indexOf("?") + 1,
+            queryEnd = url.indexOf("#") + 1 || url.length + 1,
+            query = url.slice(queryStart, queryEnd - 1),
+            pairs = query.replace(/\+/g, " ").split("&"),
+            parms = {},
+            i, n, v, nv;
+        if (query === url || query === "") return [];
+
+        for (i = 0; i < pairs.length; i++) {
+            nv = pairs[i].split("=", 2);
+            n = decodeURIComponent(nv[0]);
+            v = decodeURIComponent(nv[1]);
+
+            if (!parms.hasOwnProperty(n)) parms[n] = [];
+            parms[n].push(nv.length === 2 ? v : null);
+        }
+
+        return parms;
+    }
+    document.querySelector("#filter_form").addEventListener('submit', function(e) {
+        e.preventDefault();
+        const ward = document.querySelector("#input-ward").value;
+        const kind = document.querySelector("#input-kind").value;
+        let params = parseURLParams();
+        if (ward.trim() !== '') {
+            params.ward = ward;
+        } else {
+            delete params.ward;
+        }
+        params.kind = kind;
+        window.location.href = window.location.href.split('?')[0] + '?' + joinParam(params);
+    });
+
+    function searchQuery() {
+        let params = parseURLParams();
+        params.query = document.querySelector('#search_query').value;
+        window.location.href = window.location.href.split('?')[0] + '?' + joinParam(params);
+    }
+    </script>
+{% endblock %}

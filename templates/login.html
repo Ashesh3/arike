@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+    <style>
+   input:not([type=submit]):not([type=button]):not([type=checkbox]){ 
+       background: #EFF0F7 !important;
+       width:382px !important;
+   }
+    </style>
+    <div class="bg-gray-50">
+        <div class="flex justify-center h-screen">
+            <div class="w-full flex">
+                <div class="w-full h-full md:flex hidden bg-cover bg-neutral-800 items-center">
+                    <div class="container mx-32 text-gray-50 mb-32 space-y-8">
+                        <h4 class="text-6xl font-semibold"
+                            style="font-family: Poppins;
+                                   font-weight: bold;">Arike</h4>
+                        <p>
+                            A simple and effective way to manage healthcare records and patients.
+                        </p>
+                    </div>
+                </div>
+                <div class="w-full place-self-center px-12">
+                    <h3 class="pt-4 text-4xl px-8 text-neutral-800">Authorized Login</h3>
+                    <form class="px-8 pt-6 pb-8 mb-4" method="post">
+                        {% csrf_token %}
+                        {% for hidden_field in form.hidden_fields %}
+                            {{ hidden_field.errors }}
+                            {{ hidden_field }}
+                        {% endfor %}
+                        {{ form.non_field_errors }}
+                        {% for field in form.visible_fields %}
+                            <label class="w-40 h-5 text-left text-lg tracking-normal"
+                                   style="font-family: Inter;"
+                                   for="{{ field.id_for_label }}">
+                                {{ field.label }}
+                            </label>
+                            <div style="height:6px;">
+                                <br>
+                            </div>
+                            {{ field.errors }}
+                            {{ field }}
+                            <span class="h-4 not-italic font-normal text-xs leading-4 text-gray-600">{{ field.help_text }}</span>
+                            <br>
+                            <br>
+                        {% endfor %}
+                        <input type="submit"
+                               class="rounded-xl bg-neutral-900 hover:bg-neutral-700 h-16 cursor-pointer text-center text-lg btn text-white"
+                               value="Login"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

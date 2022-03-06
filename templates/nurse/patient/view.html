@@ -1,0 +1,148 @@
+{% extends "nurse/navbar.html" %}
+{% load widget_tweaks %}
+{% block title %}Patient - View{% endblock %}
+{% block bodycontent %}
+    <div id="root">
+        <style>
+        .htxt {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 24px;
+            color: #4F4F4F;
+        }
+
+        .subtxt {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 15px;
+            line-height: 24px;
+            color: #333333;
+        }
+
+        .cardtxt {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 32px;
+            letter-spacing: 1px;
+            color: #000000;
+        }
+        </style>
+        <div class="relative md:ml-64 ">
+            <div class="px-4 mx-auto w-full">
+                <section class="pt-3 mx-3 md:mx-6 px-3">
+                    <div class="flex flex-wrap justify-center my-6">
+                        <div class="flex w-full">
+                            <h2 class="text-4xl"
+                                style="font-family: Poppins;
+                                       font-style: normal;
+                                       font-weight: bold;
+                                       font-size: 36px;
+                                       line-height: 48px;
+                                       color: #333333;">
+                                {{ patient.full_name }}
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap justify-between">
+                        <div class="flex">
+                            <h2 class="text-3xl"
+                                style="font-family: Poppins;
+                                       font-style: normal;
+                                       font-weight: bold;
+                                       font-size: 24px;
+                                       line-height: 32px;
+                                       color: #333333;">
+                                Personal Information
+                            </h2>
+                        </div>
+                        <div class="flex">
+                            <a href="/nurse/patient/update/{{ patient.id }}/"
+                               class="text-white flex flex-row justify-center items-center  w-[90px] h-10 bg-[#333333] hover:bg-[#696969] rounded-md">Edit</a>
+                        </div>
+                    </div>
+                    <div class="grid lg:grid-cols-3 gap-5 my-6">
+                        <div class="bg-[#FFFFFF] rounded-2xl w-full row-span-2 col-span-2 md:py-2"
+                             style="border-radius: 16px;">
+                            <div class="py-4 px-3 md:px-8">
+                                <h4 class="text-3xl"
+                                    style="font-family: Poppins;
+                                           font-style: normal;
+                                           font-weight: 600;
+                                           font-size: 20px;
+                                           line-height: 32px;
+                                           color: #333333;">
+                                    {{ patient.full_name }}
+                                </h4>
+                                <p class="text-[#4F4F4F]"
+                                   style="font-family: Poppins;
+                                          font-style: normal;
+                                          font-weight: normal;
+                                          font-size: 15px;
+                                          line-height: 24px;">
+                                    {{ patient.address }}
+                                </p>
+                            </div>
+                            <div class="py-0 pb-8">
+                                <div class="grid md:grid-cols-2 gap-5 px-3 md:px-8 pt-3">
+                                    <div class="flex flex-col">
+                                        <span class="htxt">Phone Number:</span>
+                                        <span class="subtxt" style="color:#2D9CDB">+91-{{ patient.phone }}</span>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span class="htxt">Emergency Phone Number</span>
+                                        <span class="subtxt" style="color:#2D9CDB">+91-{{ patient.emergency_phone_number }}</span>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span class="htxt">Gender:</span>
+                                        <span class="subtxt">{{ patient.gender|title }}</span>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span class="htxt">Birth Date:</span>
+                                        <span class="subtxt">{{ patient.date_of_birth }}</span>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span class="htxt">Facility:</span>
+                                        <span class="subtxt">{{ patient.facility.name }}</span>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span class="htxt">Ward:</span>
+                                        <span class="subtxt">{{ patient.ward.name }}</span>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span class="htxt">Last Visit:</span>
+                                        <span class="subtxt">-</span>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span class="htxt">Next Visit:</span>
+                                        <span class="subtxt">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="/nurse/patient/{{ patient.id }}/visit/"
+                           class="flex w-full h-full bg-white rounded-2xl px-3 md:px-6 py-6 items-center justify-center">
+                            <h4 class="cardtxt text-2xl items-center">Visits</h4>
+                        </a>
+                        <a href="/nurse/patient/{{ patient.id }}/treatment/"
+                           class="flex w-full h-full bg-white rounded-2xl px-3 md:px-6 py-6 items-center justify-center">
+                            <h4 class="cardtxt text-2xl items-center">Treatments</h4>
+                        </a>
+                        <a href="/nurse/patient/{{ patient.id }}/family/"
+                           class="flex w-full  bg-white rounded-2xl px-3 md:px-6 py-6 items-center justify-center h-[182px]">
+                            <h4 class="cardtxt text-2xl items-center">Family Details</h4>
+                        </a>
+                        <a href="/nurse/patient/{{ patient.id }}/disease/"
+                           class="flex w-full  bg-white rounded-2xl px-3 md:px-6 py-6 items-center justify-center -[182px]">
+                            <h4 class="cardtxt text-2xl items-center">Disease</h4>
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+{% endblock %}

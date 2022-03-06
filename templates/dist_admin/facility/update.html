@@ -1,0 +1,137 @@
+{% extends "dist_admin/navbar.html" %}
+{% load widget_tweaks %}
+{% block title %}Facilities - Update{% endblock %}
+{% block bodycontent %}
+    <div id="root">
+        <div class="relative md:ml-64 ">
+            <div class="px-4 mx-auto w-full">
+                <section class="py-6 mx-3 md:mx-6 px-3">
+                    <div class="flex flex-wrap justify-center">
+                        <div class="flex w-full md:w-1/2">
+                            <h3 class="text-3xl"
+                                style="font-family: Poppins;
+                                       font-style: normal;
+                                       font-weight: bold;
+                                       font-size: 36px;">
+                                Update Facility
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="flex my-8 justify-center">
+                        <div class="w-full md:w-1/2">
+                            <form method="post">
+                                {% csrf_token %}
+                                {% for hidden_field in form.hidden_fields %}
+                                    {{ hidden_field.errors }}
+                                    {{ hidden_field }}
+                                {% endfor %}
+                                {{ form.non_field_errors }}
+                                {% if form.errors %}
+                                    <div class=" w-full pb-[26px]">
+                                        <div class="flex w-full">
+                                            <h6 class="text-3xl"
+                                                style="font-family: Poppins;
+                                                       font-style: normal;
+                                                       font-weight: bold;
+                                                       font-size: 16px;">
+                                                Errors
+                                            </h3>
+                                        </div>
+                                        <div class=" w-full">
+                                            {{ form.non_field_errors }}
+                                            {{ form.errors  }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                <div class="flex flex-wrap w-full">
+                                    <div class="flex w-full pb-[6px]">
+                                        <label class="w-full py-3"
+                                               style="font-family: Poppins;
+                                                      font-style: normal;
+                                                      font-weight: normal;
+                                                      font-size: 24px;"
+                                               for="{{ form.kind.id_for_label }}">
+                                            {{ form.kind.label }}
+                                        </label>
+                                    </div>
+                                    {% for radio in form.kind %}
+                                        <div class="flex w-1/2">
+                                            <div class="flex items-center mr-4 mb-4">
+                                                <label for="{{ radio.id_for_label }}"
+                                                       style="font-family: Poppins;
+                                                              font-style: normal;
+                                                              font-weight: normal;
+                                                              font-size: 18px;
+                                                              line-height: 32px;
+                                                              letter-spacing: 0.75px;">
+                                                    {{ radio.choice_label }}
+                                                </label>
+                                            </div>
+                                            <span class="radio h-5 w-5">{{ radio.tag }}</span>
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="flex flex-wrap mb- pb-[21px] h-5"></div>
+                            <div class="flex flex-wrap w-full mb-6 md:mb-0 pb-[21px]">
+                                <div class="w-full mb-6 md:mb-0 pb-[21px]">
+                                    <label class="block tracking-wide text-[background: #6E7191] text-xs font-bold mb-2"
+                                           style="font-family: Inter;"
+                                           for="{{ form.name.id_for_label }}">
+                                        {{ form.name.label }}
+                                    </label>
+                                    {% render_field form.name class="block py-3 px-4 w-[520px] bg-gray-200 text-gray-700 border-gray-200 border rounded py-3 px-4 focus:outline-none focus:border-0 focus:ring-0" %}
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap w-full mb-6 md:mb-0 pb-[21px]">
+                                <div class="w-full mb-6 md:mb-0 pb-[21px]">
+                                    <label class="block tracking-wide text-[background: #6E7191] text-xs font-bold mb-2"
+                                           style="font-family: Inter;"
+                                           for="{{ form.address.id_for_label }}">
+                                        {{ form.address.label }}
+                                    </label>
+                                    {{ form.address }}
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap w-full mb-6 md:mb-0 pb-[21px]">
+                                <div class="w-full mb-6 md:mb-0 pb-[21px]">
+                                    <label class="block tracking-wide text-[background: #6E7191] text-xs font-bold mb-2"
+                                           style="font-family: Inter;"
+                                           for="{{ form.ward.id_for_label }}">
+                                        {{ form.ward.label }}
+                                    </label>
+                                    {% render_field form.ward class+="block py-3 px-4 w-[520px] bg-white text-gray-700 rounded border-0 py-3 px-4 w-[520px]" %}
+                                </div>
+                            </div>
+                            <div class="grid md:grid-cols-2 w-[470px] mb-6 gap-2">
+                                <div class="fw-full mb-6 md:mb-0">
+                                    <label class="block tracking-wide text-[background: #6E7191] text-xs font-bold mb-2"
+                                           style="font-family: Inter;"
+                                           for="{{ form.pincode.id_for_label }}">
+                                        {{ form.pincode.label }}
+                                    </label>
+                                    {% render_field form.pincode class+="w-[210px]" %}
+                                </div>
+                                <div class="w-full mb-6 md:mb-0">
+                                    <label class="block tracking-wide text-[background: #6E7191] text-xs font-bold mb-2"
+                                           style="font-family: Inter;"
+                                           for="{{ form.phone.id_for_label }}">
+                                        {{ form.phone.label }}
+                                    </label>
+                                    {% render_field form.phone class+="w-[280px]" %}
+                                </div>
+                            </div>
+                            <div class="py-6"></div>
+                            <div class="flex flex-wrap w-full mb-6 md:mb-0 pb-[21px]">
+                                <input type="submit"
+                                       class="cursor-pointer justify-center items-center absolute bg-[#333333] hover:bg-[#696969] rounded-xl w-[207px] h-14 text-white"
+                                       value="Update"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}

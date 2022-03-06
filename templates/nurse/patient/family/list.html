@@ -1,0 +1,225 @@
+{% extends "nurse/navbar.html" %}
+{% block title %}Patient - Family{% endblock %}
+{% block bodycontent %}
+    <div class="relative md:ml-64 ">
+        <style>
+        .htxt {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 24px;
+            color: #4F4F4F;
+        }
+
+        .subtxt {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 15px;
+            line-height: 24px;
+            color: #333333;
+        }
+
+        .cardtxt {
+            font-family: Poppins;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 32px;
+            letter-spacing: 1px;
+            color: #000000;
+        }
+        </style>
+        <div class="px-4 mx-auto w-full">
+            <section class="py-6 mx-3 md:mx-6 px-3">
+                <div class="container">
+                    <div class="flex flex-wrap justify-between">
+                        <div class="flex">
+                            <h2 class="text-4xl"
+                                style="font-family: Poppins;
+                                       font-style: normal;
+                                       font-weight: bold;
+                                       font-size: 36px;">
+                                Family Details
+                            </h2>
+                        </div>
+                        <div class="flex">
+                            <a href="/nurse/patient/{{ patient.id }}/family/create/"
+                               class="text-white flex flex-row justify-center items-center  w-[90px] h-10 bg-[#333333] hover:bg-[#696969] rounded-md">Add</a>
+                        </div>
+                    </div>
+                    <div class="flex pt-7">
+                        <h2 class="text-4xl"
+                            style="font-family: Poppins;
+                                   font-style: normal;
+                                   font-weight: bold;
+                                   font-size: 24px;
+                                   line-height: 32px;
+                                   color: #333333;">
+                            {{ patient.full_name }}
+                        </h2>
+                    </div>
+                    <div class="flex">
+                        <h2 class="text-4xl"
+                            style="font-family: Poppins;
+                                   font-style: normal;
+                                   font-weight: normal;
+                                   font-size: 18px;
+                                   line-height: 32px;
+                                   color: #4F4F4F;">
+                            {{ patient.address }}
+                        </h2>
+                    </div>
+                    <div class="grid-cols-3 grid w-full gap-5 py-6 pt-11">
+                        {% for family in families %}
+                            <!--Card{-->
+                            <div class="w-full" style="display: contents;">
+                                <div class="bg-white rounded-xl" style="position: relative; height:420px">
+                                    <div class="flex flex-wrap w-full justify-between px-6 py-[13px]">
+                                        <div class="flex w-[33.33%]">
+                                            <h4 class="text-3xl"
+                                                style="font-family: Poppins;
+                                                       font-style: normal;
+                                                       font-weight: 600;
+                                                       font-size: 20px;
+                                                       line-height: 32px;
+                                                       letter-spacing: 0.75px;
+                                                       color: #333333;">
+                                                {{ family.full_name }}
+                                            </h4>
+                                        </div>
+                                        <div class="flex w-4/12 justify-end">
+                                            <span class="text-[#4F4F4F] bg-[#E0E0E0] px-6 py-2 rounded-[46px]"
+                                                  style="font-family: Poppins;
+                                                         font-style: normal;
+                                                         font-weight: 500;">
+                                            {{ family.relation|title }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="w-full py-3 px-6">
+                                        <p class="text-[#4F4F4F]"
+                                           style="font-family: Poppins;
+                                                  font-style: normal;
+                                                  font-weight: normal;
+                                                  font-size: 15px;
+                                                  line-height: 24px;">
+                                            {{ family.address }}
+                                        </p>
+                                    </div>
+                                    <div class="py-0 pb-8">
+                                        <div class="grid md:grid-cols-2 gap-5 px-[24px] pt-3">
+                                            <div class="flex flex-col">
+                                                <span class="subtxt"
+                                                      style="font-family: Poppins;
+                                                             font-style: normal;
+                                                             font-weight: 600;
+                                                             font-size: 15px;
+                                                             line-height: 24px;
+                                                             color: #2D9CDB;">+91-{{ family.phone }}</span>
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <span class="subtxt"
+                                                      style="font-family: Poppins;
+                                                             font-style: normal;
+                                                             font-weight: 600;
+                                                             font-size: 15px;
+                                                             line-height: 24px;
+                                                             color: #2D9CDB;">{{ family.email }}</span>
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <span class="htxt">Birth Date:</span>
+                                                <span class="subtxt">{{ family.date_of_birth }}</span>
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <span class="htxt">Occupation:</span>
+                                                <span class="subtxt">{{ family.occupation }}</span>
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <span class="htxt">Education:</span>
+                                                <span class="subtxt">{{ family.education }}</span>
+                                            </div>
+                                            <div class="flex flex-col">
+                                                <span class="htxt">Remark:</span>
+                                                <span class="subtxt">{{ family.remarks }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-full" style="position: absolute; bottom:0">
+                                        <div class="py-3 px-6 text-black" style="border-top: 3px solid #F2F2F2;">
+                                            <div class="flex flex-wrap w-full justify-between">
+                                                {% if family.is_primary %}
+                                                    <div class="flex flex-col">
+                                                        <span class="htxt">Primary Member</span>
+                                                    </div>
+                                                {% else %}
+                                                    <div class="flex flex-col">
+                                                        <span class="htxt"></span>
+                                                        <span class="subtxt" style="color:#2D9CDB"></span>
+                                                    </div>
+                                                {% endif %}
+                                                <div class="grid md:grid-cols-2 ">
+                                                    <div class="flex">
+                                                        <a href="/nurse/patient/{{ patient.id }}/family/delete/{{ family.id }}/"
+                                                           class="py-2 rounded-md mr-1 w-[90px] h-[40px] flex flex-row justify-center items-center "
+                                                           style="border: 2px solid #333333; box-sizing: border-box; border-radius: 8px; family: Poppins; font-style: normal; font-weight: 600; font-size: 13px; line-height: 22px; ">Delete
+                                                        </a>
+                                                    </div>
+                                                    <div class="flex">
+                                                        <a href="/nurse/patient/{{ patient.id }}/family/update/{{ family.id }}/"
+                                                           class="text-white flex flex-row justify-center items-center  w-[90px] h-10 bg-[#333333] hover:bg-[#696969] rounded-md">Edit</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--}Card-->
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script>
+    function joinParam(object) {
+        var parameters = [];
+        for (var property in object) {
+            if (object.hasOwnProperty(property)) {
+                parameters.push(encodeURI(property + '=' + object[property]));
+            }
+        }
+
+        return parameters.join('&');
+    }
+
+    function parseURLParams() {
+        const url = window.location.href;
+        let queryStart = url.indexOf("?") + 1,
+            queryEnd = url.indexOf("#") + 1 || url.length + 1,
+            query = url.slice(queryStart, queryEnd - 1),
+            pairs = query.replace(/\+/g, " ").split("&"),
+            parms = {},
+            i, n, v, nv;
+        if (query === url || query === "") return [];
+
+        for (i = 0; i < pairs.length; i++) {
+            nv = pairs[i].split("=", 2);
+            n = decodeURIComponent(nv[0]);
+            v = decodeURIComponent(nv[1]);
+
+            if (!parms.hasOwnProperty(n)) parms[n] = [];
+            parms[n].push(nv.length === 2 ? v : null);
+        }
+
+        return parms;
+    }
+
+    function searchQuery() {
+        let params = parseURLParams();
+        params.query = document.querySelector('#search_query').value;
+        window.location.href = window.location.href.split('?')[0] + '?' + joinParam(params);
+    }
+    </script>
+{% endblock %}

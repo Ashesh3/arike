@@ -1,0 +1,91 @@
+{% extends "nurse/navbar.html" %}
+{% load widget_tweaks %}
+{% block title %}Disease - Create{% endblock %}
+{% block bodycontent %}
+    <div id="root">
+        <div class="relative md:ml-64 ">
+            <div class="px-4 mx-auto w-full">
+                <section class="py-6 mx-3 md:mx-6 px-3">
+                    <div class="flex flex-wrap justify-center">
+                        <div class="flex w-full md:w-1/2">
+                            <h3 class="text-3xl"
+                                style="font-family: Poppins;
+                                       font-style: normal;
+                                       font-weight: bold;
+                                       font-size: 36px;">
+                                Add Disease History
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="flex my-8 pt-8 justify-center">
+                        <div class="w-full md:w-1/2">
+                            <form method="post">
+                                {% csrf_token %}
+                                {% for hidden_field in form.hidden_fields %}
+                                    {{ hidden_field.errors }}
+                                    {{ hidden_field }}
+                                {% endfor %}
+                                {% if form.errors %}
+                                    <div class=" w-full pb-[26px]">
+                                        <div class="flex w-full">
+                                            <h6 class="text-3xl"
+                                                style="font-family: Poppins;
+                                                       font-style: normal;
+                                                       font-weight: bold;
+                                                       font-size: 16px;">
+                                                Errors
+                                            </h3>
+                                        </div>
+                                        <div class=" w-full">
+                                            {{ form.non_field_errors }}
+                                            {{ form.errors  }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                <div class="w-full mb-6 md:mb-0 lg:col-span-2">
+                                    <div class="w-full mb-6 md:mb-0">
+                                        <label class="block tracking-wide text-[background: #6E7191] text-xs font-bold mb-2"
+                                               style="font-family: Inter;"
+                                               for="{{ form.name.id_for_label }}">
+                                            {{ form.name.label }}
+                                        </label>
+                                        {% render_field form.name class="block py-3 px-4 w-full bg-gray-200 text-gray-700 border-gray-200 border rounded py-3 px-4 focus:outline-none focus:border-0 focus:ring-0" %}
+                                        <p class="text-gray-500 my-2 mx-6">
+                                        </p>
+                                    </div>
+                                    <div class="w-full mb-6 md:mb-0 lg:col-span-2">
+                                        <div class="w-full mb-6 md:mb-0">
+                                            <label class="block tracking-wide text-[background: #6E7191] text-xs font-bold mb-2"
+                                                   style="font-family: Inter;"
+                                                   for="{{ form.treatment.id_for_label }}">
+                                                {{ form.treatment.label }}
+                                            </label>
+                                            {% render_field form.treatment class="block py-3 px-4 w-full border-0 rounded-xl py-3 px-4 focus:outline-none focus:ring-0" %}
+                                            <p class="text-gray-500 my-2 mx-6">
+                                            </p>
+                                        </div>
+                                        <div class="w-full mb-6 md:mb-0 lg:col-span-2">
+                                            <div class="w-full mb-6 md:mb-0">
+                                                <label class="block tracking-wide text-[background: #6E7191] text-xs font-bold mb-2"
+                                                       style="font-family: Inter;"
+                                                       for="{{ form.note.id_for_label }}">
+                                                    {{ form.note.label }}
+                                                </label>
+                                                {% render_field form.note style="width:100% !important;" class="block py-3 px-4 w-full bg-gray-200 text-gray-700 border-gray-200 border rounded py-3 px-4 focus:outline-none focus:border-0 focus:ring-0" %}
+                                                <p class="text-gray-500 my-2 mx-6">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-wrap w-full mb-6 md:mb-0 pt-[34px]">
+                                            <input type="submit"
+                                                   class="cursor-pointer justify-center items-center absolute bg-[#333333] hover:bg-[#696969] rounded-xl w-[207px] h-14 text-white"
+                                                   value="Create"/>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}

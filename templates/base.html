@@ -1,0 +1,48 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Home</title>
+        <style>
+        input:not([type=submit]):not([type=radio]):not([type=button]):not([type=checkbox]){ 
+            border:0;
+            height:48px;
+            background: #FCFCFC;
+            border-radius: 12px;
+        }
+
+        textarea {
+            width:517px !important;
+            border:0 !important;
+            height:148px !important;
+            background: #FCFCFC !important;
+            border-radius: 12px !important;
+        }
+
+        input[type=checkbox]{
+            width: 25px;
+            height: 24px;
+            background: #FCFCFC;
+            margin-left: 10px;
+        }
+
+        .btn { 
+            width: 382px; 
+            border: 0; 
+            font-family: Inter;
+        }
+
+        </style>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Inter&amp;display=swap"
+              rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins&amp;display=swap"
+              rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        {% tailwind_css %}
+    </head>
+    <body class="bg-[#f2f2f2]">
+        {% block content %}{% endblock %}
+    </body>
+</html>

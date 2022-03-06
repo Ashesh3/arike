@@ -1,0 +1,134 @@
+{% extends "nurse/navbar.html" %}
+{% block title %}Profile{% endblock %}
+{% block bodycontent %}
+    <div id="root">
+        <style>
+            input:not([type=submit]):not([type=button]):not([type=checkbox]){ 
+                background: #FCFCFC;
+                width:382px;
+            }
+        </style>
+        <div class="relative md:ml-64 ">
+            <div class="px-4 mx-auto w-full">
+                <section class="py-6 mx-3 md:mx-6 px-3">
+                    <div class="container">
+                        <div class="justify-center lg:w-1/2 mx-auto">
+                            <div class="font-bold text-4xl rounded-full bg-[#C4C4C4] flex items-center justify-center font-mono mx-auto h-24 w-24"
+                                 style="font-family: Poppins;">
+                                {{ user.first_name|slice:":1" }}
+                            </div>
+                            <div class=" text-2xl font-bold mx-auto mt-4 flex justify-center pb-1">{{ user.get_full_name }}</div>
+                            <div class="pb-3 text-sm bg-[#333333] font-bold mx-auto rounded-full mb-4 flex justify-center h-8 text-white w-44">
+                                <p style="w-30 font-family: Poppins;
+                                          font-style: normal;
+                                          font-weight: normal;
+                                          font-size: 18px;
+                                          line-height: 32px;">
+                                    {{ user.get_role_display }}
+                                </p>
+                            </div>
+                            <div class="pb-8 pt-3 flex">
+                                <hr class="bg-[#868181] h-1" style="border: 1px solid #E0E0E0; width:99%">
+                            </div>
+                            <div class="flex my-2 pb-3">
+                                <h3 class="text-3xl"
+                                    style="font-family: Poppins;
+                                           font-style: normal;
+                                           font-weight: bold;
+                                           font-size: 30px;
+                                           line-height: 32px;">
+                                    Profile
+                                </h3>
+                            </div>
+                            <form method="post">
+                                {% csrf_token %}
+                                {% for hidden_field in form.hidden_fields %}
+                                    {{ hidden_field.errors }}
+                                    {{ hidden_field }}
+                                {% endfor %}
+                                {{ form.non_field_errors }}
+                                <div class="grid w-full lg:grid-cols-2 gap-3">
+                                    <div class="w-full mb-6 md:mb-0">
+                                        <label class="w-40 h-5 text-left text-lg tracking-normal"
+                                               style="font-family: Inter;"
+                                               for="{{ form.first_name.id_for_label }}">
+                                            {{ form.first_name.label }}
+                                        </label>
+                                        {{ form.first_name }}
+                                    </div>
+                                    <div class="w-full mb-6 md:mb-0">
+                                        <label class="w-40 h-5 text-left text-lg tracking-normal"
+                                               style="font-family: Inter;"
+                                               for="{{ form.last_name.id_for_label }}">
+                                            {{ form.last_name.label }}
+                                        </label>
+                                        {{ form.last_name }}
+                                    </div>
+                                    <div class="w-full mb-6 md:mb-0">
+                                        <label class="w-40 h-5 text-left text-lg tracking-normal"
+                                               style="font-family: Inter;"
+                                               for="{{ form.email.id_for_label }}">
+                                            {{ form.email.label }}
+                                        </label>
+                                        {{ form.email }}
+                                    </div>
+                                    <div class="w-full mb-6 md:mb-0">
+                                        <label class="w-40 h-5 text-left text-lg tracking-normal"
+                                               style="font-family: Inter;"
+                                               for="{{ form.phone.id_for_label }}">
+                                            {{ form.phone.label }}
+                                        </label>
+                                        {{ form.phone }}
+                                    </div>
+                                </div>
+                                <div class="my-4"></div>
+                                <div class="flex my-2 pb-3 pt-8">
+                                    <h3 class="text-3xl"
+                                        style="font-family: Poppins;
+                                               font-style: normal;
+                                               font-weight: bold;
+                                               font-size: 30px;
+                                               line-height: 32px;">
+                                        Password
+                                    </h3>
+                                </div>
+                                <div class="flex"></div>
+                                <div class="grid w-full lg:grid-cols-2 gap-3">
+                                    <div class="w-full mb-6 md:mb-0">
+                                        <label class="h-5 text-left text-lg tracking-normal"
+                                               style="font-family: Inter;"
+                                               for="{{ form.old_password.id_for_label }}">
+                                            {{ form.old_password.label }}
+                                        </label>
+                                        {{ form.old_password }}
+                                    </div>
+                                    <br>
+                                    <div class="w-full mb-6 md:mb-0">
+                                        <label class="h-5 text-left text-lg tracking-normal"
+                                               style="font-family: Inter;"
+                                               for="{{ form.new_password1.id_for_label }}">
+                                            {{ form.new_password1.label }}
+                                        </label>
+                                        {{ form.new_password1 }}
+                                    </div>
+                                    <div class="w-full mb-6 md:mb-0">
+                                        <label class="h-5 text-left text-lg tracking-normal"
+                                               style="font-family: Inter;"
+                                               for="{{ form.new_password2.id_for_label }}">
+                                            {{ form.new_password2.label }}
+                                        </label>
+                                        {{ form.new_password2 }}
+                                    </div>
+                                    <div class="my-4"></div>
+                                </div>
+                                <input type="submit"
+                                       class="cursor-pointer justify-center items-center absolute bg-[#333333] hover:bg-[#696969] rounded-xl w-72 h-14 text-white"
+                                       value="Update"/>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+{% endblock %}

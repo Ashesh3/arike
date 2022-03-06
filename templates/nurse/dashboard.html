@@ -1,0 +1,51 @@
+{% extends "nurse/navbar.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block bodycontent %}
+    <div id="root">
+        <div class="relative md:ml-64 ">
+            <div class="px-4 mx-auto w-full">
+                <section class="py-6 mx-3 md:mx-6 px-3">
+                    <div class="container items-center">
+                        <div class="container my-8">
+                            <div class="relative flex flex-wrap items-stretch">
+                                <span class="z-10 h-full leading-snug font-normal absolute text-center text-slate-400 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 pr-3 py-3">
+                                    <svg width="24"
+                                         height="24"
+                                         viewBox="0 0 24 24"
+                                         fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11 20C15.9706 20 20 15.9706 20 11C20 6.02944 15.9706 2 11 2C6.02944 2 2 6.02944 2 11C2 15.9706 6.02944 20 11 20Z"
+                                              stroke="#6E7191"
+                                              stroke-width="2"
+                                              stroke-linecap="round"
+                                              stroke-linejoin="round"/>
+                                        <path d="M22 22L18 18"
+                                              stroke="#6E7191"
+                                              stroke-width="2"
+                                              stroke-linecap="round"
+                                              stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                                <input type="text"
+                                       placeholder="Search"
+                                       id="search_query"
+                                       value=""
+                                       class="border-0 px-3 py-3 relative rounded-md bg-slate-100 text-sm shadow outline-none focus:outline-none pl-12 w-80">
+                            </div>
+                        </div>
+                        <div class="h-4"></div>
+                        <div class="grid-cols-1 md:grid-cols-2 grid w-full my-8 gap-7">
+                            <div class="py-6 bg-white rounded-xl h-36 p-4">Schedule</div>
+                            <div class="py-6 bg-white rounded-xl h-36 p-4">Logs</div>
+                            <div class="py-6 bg-white rounded-xl h-36 p-4">...</div>
+                            <div class="py-6 bg-white rounded-xl h-36 p-4">...</div>
+                            <div class="py-6 bg-white rounded-xl h-36 p-4">...</div>
+                            <div class="py-6 bg-white rounded-xl h-36 p-4">...</div>
+                            <div class="py-6 bg-white rounded-xl h-36 p-4">...</div>
+                            <div class="py-6 bg-white rounded-xl h-36 p-4">...</div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
