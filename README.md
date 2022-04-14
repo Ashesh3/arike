@@ -1,6 +1,4 @@
-Finished a MVP. 
-
-Frontend design is fully complete and almost identical to the design reference provided
+Patient Management System in Django
 
 ## District Admin
 
