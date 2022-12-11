@@ -1,5 +1,7 @@
 Patient Management System in Django
 
+This project is tested with [BrowserStack](https://www.browserstack.com/).
+
 ## District Admin
 
 * [x] Profile Page
